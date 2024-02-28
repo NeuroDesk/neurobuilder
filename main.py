@@ -260,7 +260,10 @@ def cmd_create(args):
     recording_path = get_container_recording_path(version_path)
 
     # Make sure we can use GUI applications inside the container.
-    run_command("xhost", "local:root")
+    try:
+        run_command("xhost", "local:root")
+    except:
+        pass
 
     # Actually run the container and do the recording.
     asciinema.record_asciicast(recording_path, command=record_command)
