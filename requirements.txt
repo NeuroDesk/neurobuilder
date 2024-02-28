@@ -1,0 +1,2 @@
+asciinema==2.4.0
+platformdirs==4.2.0
