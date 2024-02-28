@@ -259,6 +259,9 @@ def cmd_create(args):
     # Get the recording path for the asciicast file.
     recording_path = get_container_recording_path(version_path)
 
+    # Make sure we can use GUI applications inside the container.
+    run_command("xhost", "local:root")
+
     # Actually run the container and do the recording.
     asciinema.record_asciicast(recording_path, command=record_command)
 
@@ -358,7 +361,7 @@ if __name__ == "__main__":
         "--env", type=str, help="the environment path to store containers.", default=""
     )
 
-    subparsers = parser.add_subparsers(help="sub-command help")
+    subparsers = parser.add_subparsers(help="sub-command help", required=True)
 
     parser_create = subparsers.add_parser(
         "create", help="create a new container using a interactive builder."
